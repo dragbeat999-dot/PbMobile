@@ -3,41 +3,9 @@
 <head>
     <title>PB Mod Proxy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
-        iframe { width: 100%; height: 100%; border: none; }
-        #loading { color: #0f0; font-family: monospace; text-align: center; padding: 20px; }
-    </style>
+    <style> body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; } iframe { width: 100%; height: 100%; border: none; } </style>
 </head>
 <body>
-    <div id="loading">Menghubungkan ke PB Mobile...</div>
-    <!-- Kita load game dari file client.js tiruan kita -->
-    <iframe id="gameFrame" src="https://pbmobile.app/index.html" style="display:none;"></iframe>
-
-    <script>
-        // Trik Safari: Kita ganti src iframe ke halaman tiruan, tapi kita blokir navigasi aslinya
-        // Biar halamannya ngerasa ini domain pbmobile
-        setTimeout(() => {
-            document.getElementById('loading').style.display = 'none';
-            const iframe = document.getElementById('gameFrame');
-            iframe.style.display = 'block';
-            // Arahkan ke halaman tiruan yang udah disuntik client.js kita
-            iframe.src = 'https://pbmobile.app/index.html?mod=true';
-            
-            // Trik intercept: 
-            // Ini agak hacky, tapi kita coba load client.js dari github ke dalam iframe
-            iframe.onload = () => {
-                try {
-                    const doc = iframe.contentDocument;
-                    if (doc) {
-                        const script = doc.createElement('script');
-                        // Ambil script client.js tiruan dari GitHub kita
-                        script.src = 'https://dragbeat999-dot.github.io/PbMobile/client.js';
-                        doc.body.appendChild(script);
-                    }
-                } catch(e) { console.log("Cross origin block", e); }
-            };
-        }, 1000);
-    </script>
+    <iframe id="gameFrame" src="https://pbmobile.app/"></iframe>
 </body>
 </html>
